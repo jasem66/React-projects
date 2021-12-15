@@ -9,7 +9,8 @@ function App() {
   const [tours,setTours] = useState([]);
 
   const clearTours = (id) =>{
-    return setTours([])
+ const newTours = tours.filter((tour)=> tour.id !== id );
+ setTours(newTours)
   }
 
 
@@ -38,8 +39,17 @@ function App() {
   
    </>
  }
+if(tours.length===0){
+  return <main>
+    <div className="title">
+      <h2>no tours left</h2>
+      <button className='btn' onClick={fetchTours}>refresh</button>
+    </div>
+  </main>
+}
+
  return <>
- <Tours tours = {tours}/>
+ <Tours tours = {tours} clearTours={clearTours} />
  </>
 }
 
