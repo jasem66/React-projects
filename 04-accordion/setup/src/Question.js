@@ -4,14 +4,14 @@ const Question = ({id,title,info}) => {
   const [showInfo, setShowInfo] = useState(false);
 
   return <article  className="question">
-    <header>
-<h4>{title}</h4>
-<button onClick={()=>setShowInfo(!showInfo)}>
-  {showInfo ? <AiOutlineMinus /> : <AiOutlinePlus /> }</button>
-</header>
-
-{showInfo ? <p> {info}</p> : ''}
+   <div><h3 >{title}</h3>
    
+  </div>
+    <button className='btn'
+  onClick={()=>setShowInfo(!showInfo)}>
+    {showInfo ? <AiOutlineMinus /> : <AiOutlinePlus />  }
+  </button>
+  {showInfo && info}
  </article>
  
   }

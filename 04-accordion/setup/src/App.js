@@ -9,10 +9,9 @@ function App() {
     <div className="container">
   <h2> Question and answers</h2>
   
-<article>{questions.map((all)=>{ 
-  return <Question {...all} />
+<article>{questions.map((q )=>{
+  return <SingleQuestion key={q.id} {...q} />
 })}
- 
 </article>
   </div>
   </main>
