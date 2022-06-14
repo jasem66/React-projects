@@ -1,68 +1,63 @@
 import React, { useState, useEffect } from 'react'
 import { FaAngleDoubleRight } from 'react-icons/fa'
+
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
-const url = 'https://course-api.com/react-tabs-project'
+const url = 'https://fakestoreapi.com/products/'
+
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [jobs,setjobs] =useState([]);
-  const [value,setValue] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [jobs, setJobs] = useState([])
+  const [value, setValue] = useState(0)
 
-  const fetchJobs = async ()=>{
-    const response = await fetch(url);
-    const newJobs = await response.json();
-    setjobs(newJobs);
-    setLoading(false);
-
+  const fetchJobs = async () => {
+    const response = await fetch(url)
+    const newJobs = await response.json()
+    console.log(newJobs)
+    setJobs(newJobs)
+    setLoading(false)
   }
 
+  useEffect(() => {
+    fetchJobs()
+  }, [])
 
-  useEffect(()=>{
-   fetchJobs()
-  },[])
- if(loading){
-      return <div><h1>loading...</h1></div>
-    };
-
-const {company,dates,duties,title} = jobs[value];
-    return (
-    <main className="section">
-      <div className="title">
-        <h2>experience</h2>
-        <div className="underline"></div>   
-</div>
-<div className="job-center">
-  <div className="btn-container">
-    {jobs.map((item,inde)=>{
-      return <button onClick={()=>{setValue(inde)}}
-       key={item.id}
-       className={`job-btn ${inde===value && "active-btn"}`}>
-         {item.company}</button>
-
-    })}
-  </div>
-  </div> 
-
-        <article className="job-info">
+  if (loading) {
+    return <h3>Loading...</h3>
+  }
+  const { title, description, category, price } = jobs[value]
+  return (
+    <section className='section'>
+      <div className='title'>
         <h3>{title}</h3>
-        <h4>{company}</h4>
-        <p className="job-date">{dates}</p>
-        {duties.map((duty, index)=>{
-          return(
-            <div key={index} className="job-desc">
-              <FaAngleDoubleRight className="jon-icon">
-              </FaAngleDoubleRight>
-              <p>{duty}</p>
-              </div>
-            
+        <div className="underline"></div>
+        <h4>{category}</h4>
+        <h4>{price}</h4>
+        <p>{description}</p> 
+      </div>
+      <div className="jo-center">
+      <div className="btn-container">
+{jobs.map((item,index)=>{
+  return <button className={`job-btn ${index ===value ? 'active-btn ' : 'job-btn'}`} onClick={()=>setValue(index)} key={item.id}>{item.id}</button>
+ 
+  // {'job-btn ${index === value && active-btn}}
+        
+})}
 
-          )
+        </div>
+      </div>
+    </section>
+  )}
 
-        }
-        )}
-      </article>
-    </main>
-    )
-} 
+{
+  /* <div className='row row-cols-1 row-cols-md-3  row-cols-sm-2  row-cols-lg-4  g-4'>
+          { Data.length?
+          Data.map((item) => (
+            <Product key={item.id} {...item} />
+          ))
+          : <h3>Loading...</h3>
+        
+        }  */
+}
 
 export default App

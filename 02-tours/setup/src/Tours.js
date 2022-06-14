@@ -1,21 +1,17 @@
 import React from 'react';
 import Tour from './Tour';
-const Tours = ({tours, clearTours}) => {
+const Tours = ({ tours }) => {
   return (
     <section>
-      <div className="title">
+      <div className='title'>
         <h2>our tours</h2>
-        <div className="underline"></div>
+        <div className='underline'></div>
       </div>
-      <div>
-        {tours.map((tour)=>{
-return <Tour key={tour.id} {...tour} clearTours={clearTours}/>
-
-        })}
-      </div>
+      {tours.map((tour) => {
+        return <Tour key={tour.id} {...tour}  />
+      })}
     </section>
   )
-  
-};
+}
 
 export default Tours;
