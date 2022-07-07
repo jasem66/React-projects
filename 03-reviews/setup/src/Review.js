@@ -7,40 +7,40 @@ const Review = () => {
   const { name, job, image, text } = people[index]
   const [Readmore, setReadmore] = useState(false)
 
-  const checkNumber = (number) => {
-    if (number > people.length - 1) {
-      return 0
-    }
-    if (number < 0) {
-      return people.length - 1
-    }
-    return number
+
+  const randomnumber=()=>{
+   let random =Math.floor(Math.random() * people.length);
+   if(random===index){
+    random= index+1
+   } 
+   setIndex(checkNumber(random))
   }
+
+const checkNumber=((num)=>{
+  if(num > people.length -1){
+    return 0
+  }
+  if(num<0){
+    return people.length -1
+  }
+  else{
+    return num 
+    console.log(num);
+  }
+
+})
 
   const prevPerson = () => {
-    setIndex((index)=>{
-    let newIndex = index - 1
-    return checkNumber(newIndex)
+    setIndex((index) => {
+      const prev = index - 1
+      return checkNumber(prev) 
+    })
   }
-    )
-  }
-
   const nextPerson = () => {
-    setIndex((index)=>{
-    let newIndex = index + 1
-    return checkNumber(newIndex)
-  }
-    )
-  }
-
-  const randomNumber = () => {
-let random = Math.floor(Math.random() * people.length)
-if(random === index)
-{
-   random = index + 1
-}
-
-setIndex(checkNumber(random))
+    setIndex((index) => {
+      const next = index + 1
+      return checkNumber(next) 
+    })
   }
 
   return (
@@ -67,9 +67,7 @@ setIndex(checkNumber(random))
           <FaChevronRight />
         </button>
       </div>
-      <button className='random-btn' onClick={randomNumber}>
-        surprise
-      </button>
+      <button className='random-btn'onClick={randomnumber}>surprise</button>
     </article>
   )
 }

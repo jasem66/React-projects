@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 
 
-const Tour = ({ image, name, id, price, info }) => {
+const Tour = ({ image, name, id, price, info, clearTours }) => {
   const [readMore, setReadMore] = useState(false)
-  const [tours, setTours] = useState([])
-  const clearTours = (id) => {
-    const newTours = tours.filter((tour) => tour.id !== id)
-    setTours(newTours)
-  }
+
+ 
   return (
     <article className='single-tour'>
       <img src={image} alt={name} />

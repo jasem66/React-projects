@@ -1,23 +1,44 @@
-import React from 'react';
+import React from 'react'
+import { useEffect, useState } from 'react'
 
-const List = ({ people }) => {
+import data from './data'
+const List = () => {
+  const [people, setpeople] = useState(data)
+
+  const clear = () => {
+    setpeople([])
+  }
   return (
     <>
-   {people.map((person)=>{ 
-     const {id,name,image,age}=person;
-     return (
-      
-       <article key={id} className='person'>
-         <img src={image} alt={name}/>
-         <div>
-           <h4>{name}</h4>
-           <p>{age} years old</p>
-         </div>
-       </article>
-     );
-   })}
+      <div>
+        <h4
+          className='container
+ '
+        >
+          {people.length} today birthday
+        </h4>
+        {people.map((person) => {
+          const { image, id, name, age } = person
+          return (
+            <>
+              <div key={id} className='person'>
+                <img src={image} alt={name} />
+                <h5 className='img'>{name}</h5>
+                <h4>{age}</h4>
+              </div>
+            </>
+          )
+        })}
+        <div className='container'>
+          <button className='button' onClick={clear}>
+            remove all
+          </button>
+          <button className='button' onClick={() => setpeople(data)}>
+            refresh all{' '}
+          </button>
+        </div>
+      </div>
     </>
-  );
+  )
 }
-;
-export default List;
+export default List
