@@ -1,25 +1,17 @@
-import React, { useState } from 'react';
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-const Question = ({id,title,info}) => {
+import React, { useState } from 'react'
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+const Question = ({ id, title, info }) => {
   const [showInfo, setShowInfo] = useState(false)
-
+  console.log(showInfo)
   return (
     <article className='question'>
-      <div>
-        <header>
-          <h4>{title}</h4>
-      
-        <button className='btn' onClick={() => setShowInfo(!showInfo)}>
-          {showInfo ? <AiOutlineMinus /> : <AiOutlinePlus />}
-        </button>
-       
-        </header>
-       {showInfo && <p>{info}</p>} 
-      </div> 
+      <h4 className='header'>{title}</h4>
 
-      {/* {showInfo && info} */}
+      {showInfo && <p>{info} </p>}
+      <buton className='btn' onClick={() => setShowInfo(!showInfo)}>
+        {showInfo ? <AiOutlineMinus /> : <AiOutlinePlus />}
+      </buton>
     </article>
   )
- 
-  }
-export default Question;
+}
+export default Question

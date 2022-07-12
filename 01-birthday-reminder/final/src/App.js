@@ -1,21 +1,9 @@
-// import React, { useState } from 'react'
-// import data from './data'
-// import List from './List'
-// function App() {
-//   const [people, setPeople] = useState(data);
-// const clear=()=>{
-//   setPeople([])
-// }
+import React from 'react'
 
-//   return (
-//     <main>
-//       <div className='container'>
-//         <h3>{people.length} birthday today</h3>
-//        <List people={people} />
-//         <button onClick={()=>clear([])}>clear all</button>
-//       </div>
-//     </main>
-//   )
-//   }
+function App() {
+  return (
+    <div>App</div>
+  )
+}
 
-// export default App
+export default App

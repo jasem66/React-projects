@@ -6,7 +6,7 @@ import List from './List';
 
 ReactDOM.render(
   <React.StrictMode>
-    <List />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

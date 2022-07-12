@@ -10,10 +10,14 @@ const [questions, setQuestions] = useState(data)
   return( <main>
    <div className="container">
      <div>
-       {questions.map((item)=>{
- return <SingleQuestion key={item.id} {...item} />
-       })}
-      
+ 
+      {
+  questions.map((item)=>{
+   return   <SingleQuestion key={item.id}{...item} />
+  })
+}
+
+
      </div>
    </div>
   </main>
