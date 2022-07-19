@@ -317,9 +317,11 @@ Sidebar
   box-shadow: var(--clr-red-dark);
   transition: var(--transition);
   transform: translate(-100%);
+ 
 }
 .show-sidebar {
   transform: translate(0);
+  z-index: 10;
 }
 @media screen and (min-width: 676px) {
   .sidebar {
