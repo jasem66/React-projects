@@ -6,7 +6,7 @@ function App() {
   const [name, setName] = useState('')
   const [list, setList] = useState([])
   const [isEditing, setIsEditing] = useState(false)
-  const [edited, setEdited] = useState(null)
+  const [editId, setEditId] = useState(null)
   const [alert, setAlert] = useState({
     show: false,
     msg: 'hello',
@@ -18,9 +18,20 @@ function App() {
     if (!name) {
       showAlert(true,'danger','please enter value')
     } else if (name && isEditing) {
-      setAlert(true,"success",'jjjfj')
+  setList(list.map((item)=>{
+    if(item.id===editId){
+      return {...item,title:name}
+    }
+    return item
+  }))
+
+  setName('')
+  setEditId(null)
+  setIsEditing(false)
+  showAlert(true,"success",'value changed')
     } else {
       // show alert
+      showAlert(true,"success",'submited')
       const newItem = { id: new Date().getTime().toString(), title: name }
       setList([...list, newItem])
       setName('')
@@ -29,10 +40,29 @@ function App() {
   const showAlert = (show = false, type = '', msg = '') => {
     setAlert({ show, type, msg })
   }
+
+  const clearList =()=>{
+     showAlert(true, 'danger', 'empty')
+     setList([])
+  }
+  const removeItem=(id)=>{
+      showAlert(true, 'danger', 'removed')
+      setList( list.filter((item)=> item.id !== id) )
+
+  }
+
+const editItem=(id)=>{
+const specificItem=list.find((item) => item.id === id)
+setIsEditing(true)
+setEditId(id)
+setName(specificItem.title)
+}
+
+
   return (
     <section className='section-center'>
       <form onSubmit={handleSubmit} className='gerocery-form'>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+        {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
 
         <h3>gerocery bud</h3>
         <div className='form-control'>
@@ -52,8 +82,10 @@ function App() {
       </form>
       {list.length > 0 && (
         <div className='gerocery-container'>
-          <List items={list} />
-          <button className='clear-btn'>clear item</button>
+          <List items={list} removeItem={removeItem} editItem={editItem} />
+          <button className='clear-btn' onClick={clearList}>
+            clear item
+          </button>
         </div>
       )}
     </section>

@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
 import { useDeferredValue } from 'react'
 
-const Alert = ({ type, msg, removeAlert }) => {
+const Alert = ({ type, msg, removeAlert,list }) => {
   useEffect(() => {
     const setTime = 
       setTimeout(() => {
         removeAlert()
-      }, 2000)
+      }, 3000)
       return () => {
         clearTimeout(setTime)
       }
     
-  }, [])
+  }, [list])
 
   return <p className={`alert alert-${type}`}>{msg}</p>
 }
