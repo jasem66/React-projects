@@ -1,9 +1,15 @@
 import React from 'react'
 
-function counter() {
+function Review({id,name,text,job,image,deleteI}) {
+  
   return (
-    <div>counter</div>
+    <div>
+      <h2>{name}</h2>
+      <p>{text}</p>
+      {/* <img src={image} alt={name} /> */}
+      <button onClick={()=>deleteI(id)}>delete</button>
+    </div>
   )
 }
 
-export default counter
+export default Review
