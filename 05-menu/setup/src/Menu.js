@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Menu = ({ items }) => {
+const Menu = ({ menu }) => {
   return (
     <div className='section-center'>
-      {items.map((item) => {
+      {menu.map((item) => {
         const { id, title, img, desc,price } = item
         return (
     <article className="menu-item" key={id}>
