@@ -4,112 +4,57 @@ import { FaQuoteRight } from 'react-icons/fa'
 import data from './data'
 function App() {
   const [people, setPeople] = useState(data)
-  const [index, setIndex] = useState(0)
-  const [time, setTime] = useState(0)
+  const [index, setIndex] = useState(1)
+
+ 
 
   useEffect(() => {
-  let counter= setInterval(() => {
-    setTime(time+1)
-  }, 3000)
-   return()=>clearInterval(counter)
-  },[time])
- 
+    const interval =
+      setInterval(() => {
+          if (index >= people.length - 1) {
+            setIndex(0)
+          }
+       else setIndex(index+1)
+      }, 2000);
+      return ()=>clearInterval(interval)
+    
+  }, [index,people])
   
 
 
-//   const checkSlide = (num) => {
- 
-//     if (num > people.length - 1) {
-//       return 0
-//     }
-//     if (num < 0) {
-//       return people.length - 1
-//     }
-//     return num
-//   }
 
-//   const next=()=>{
-//     setIndex((index)=>{
-// let newIndex = index + 1
-// return checkSlide(newIndex)
-//     }
-      
+  const next =()=>{
+    if(index>=people.length-1){
+   setIndex(0)
+    }
+    else setIndex(prev => prev+1)
 
-//     )
-//   }
+  }
+  const prev = () => {
+    if (index <= 0) {
+      setIndex(people.length-1)
+    } else setIndex((prev) => prev - 1)
+  }
 
-//     const previous = () => {
-//       setIndex((index) => {
-//         let newIndex = index - 1
-//         return checkSlide(newIndex)
-//       })
-//     }
+  const { id, image, title, quote } = people[index]
 
-
-
-useEffect(() => {
- const lastIndex = people.length -1;
- const firstIndex = 0
- if(index < 0){
-setIndex(lastIndex)
- }
- if(index > lastIndex){
-  setIndex(firstIndex)
- }
-}, [index,people])
-
- useEffect(() => {
-let timer =setInterval(() => {
-   setIndex(index+1)
-  }, 3000);
-  console.log(timer);
-return()=>clearInterval(timer)
-}, [index])
-
-
-
+  let james = 'next-slide'
+  if(!index){
+    james = 'james'
+  }
   return (
-    <section className='section'>
-      <div className='title'>
-        <h2>counter : {time}</h2>
-        <button onClick={()=>setTime(0)} style={{backgroundColor:"yellow", width:100,height:"50px", border:"none"}} className="btn" >stop</button>
-        <h2>
-          <span>/</span>reviews
-        </h2>
-        
-      </div>
+    
+    <div className={james} key={id}>
+      <h2>{index}</h2>
 
-      <div className='section-center'>
-        {people.map((person, personIndex) => {
-          const { name, quote, id, title, image } = person
-          let position = 'nextSlide'
-          if (personIndex === index) {
-            position = 'activeSlide'
-          }
-          if (
-            personIndex === index - 1 ||
-            (index === 0 && personIndex === people.length - 1)
-          ) {
-            position = 'lastSlide'
-          }
-          return (
-            <article className={position} key={id}>
-              <img src={image} alt={name} className='person-img' />
-              <h4>{name}</h4>
-              <p className='title'>{title}</p>
-              <p className='text'>{quote}</p>
-              <FaQuoteRight className='icon' />
-            </article>
-          )
-        })}
-        <button className='prev' onClick={() => setIndex(index - 1)}>
-          <FiChevronLeft />
-        </button>
-        <button className='next' onClick={() => setIndex(index + 1)}>
-          <FiChevronRight />
-        </button>
+      <h2>{title}</h2>
+      <img className='person-img' src={image} alt={title} />
+      <p>{quote}</p>
+      <div>
+        <button className='btn' onClick={prev} >prev</button>
+        <button className='btn' onClick={next}>next</button>
       </div>
-    </section>
+    </div>
   )
 }
 

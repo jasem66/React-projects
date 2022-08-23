@@ -1,52 +1,45 @@
-import React, { useState, useEffect } from 'react'
-import { FaAngleDoubleRight } from 'react-icons/fa'
-
-
-// ATTENTION!!!!!!!!!!
-// I SWITCHED TO PERMANENT DOMAIN
+import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 const url = 'https://course-api.com/react-tabs-project'
-
-function App() {
-  const [loading, setloading] = useState(true)
+const App = () => {
+  const [loading, setLoading] = useState(true)
   const [jobs, setJobs] = useState([])
   const [value, setvalue] = useState(0)
 
-  const fetchData = async () => {
-    const response = await fetch(url)
-    const data = await response.json()
-    setJobs(data)
-    setloading(false)
-
+  const fetchJobs = async () => {
+    const reponse = await fetch(url)
+    const newJobs = await reponse.json()
+    setJobs(newJobs)
+    setLoading(false)
+    console.log(newJobs)
   }
   useEffect(() => {
-    fetchData()
+    fetchJobs()
   }, [])
 
-
-
-
-  
   if (loading) {
-    return <h3>Loading...</h3>
+    return <h3>loading...</h3>
   }
-const{id,order,title,dates,duties,company}=jobs[value]
-return (
-  <div>
- <div>
-     {jobs.map((item,id)=>(
-      <button className="btn" onClick={()=>setvalue(id)}>{item.company}</button>
-    ))}
- </div>
-    <h2>{title}</h2>
-    <p>{dates}</p>
-   {duties.map((item,index)=>{
-    return  <p key={index}>{item}</p>
-    })}
 
+  const { id, order, title, dates, duties, company } = jobs[value]
 
- 
-  </div>
-)
+  return (
+    <div>
+          <div>{jobs.map((item,index)=>{
+            return(
+             <button className='btn' onClick={()=>setvalue(index)}>{ item.company}</button>
+            )
+          
+          })}</div>
+
+      <h3>{title}</h3>
+      <p>{dates}</p>
+      {duties.map((item, index) => {
+        return <p key={index}>{item}</p>
+      })}
+    </div>
+  )
 }
 
 export default App
