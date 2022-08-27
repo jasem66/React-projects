@@ -1,11 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Cocktail = () => {
+const Cocktail = ({ name, info, id, image, glass }) => {
+
   return (
-    <div>
-      <h2>cocktail component</h2>
-    </div>
+    <article>
+      <h2>{name}</h2>
+      <p>{glass}</p>
+      <div className='img-container'>
+        <img src={image} alt='' />
+        <Link className="btn" to={`/cocktail/${id}`}>
+     see more
+        </Link>
+      </div>
+    </article>
   )
 }
 
